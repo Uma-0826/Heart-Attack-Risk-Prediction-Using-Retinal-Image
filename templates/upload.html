@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home2</title>
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: rgba(78, 202, 230, 0.5);
+            color: white;
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            font-family: serif;
+        }
+        .header-title {
+            font-size: 28px;
+        }
+        .nav-items {
+            display: flex;
+            gap: 25px;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .nav-items p {
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+        .nav-items p:hover {
+            color: #4ecae6;
+            text-decoration: underline;
+        }
+        .main-title {
+            font-size: 60px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 140px;
+            max-width: 900px;
+            width: 90%;
+        }
+        .info-section {
+            margin-top: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 40px;
+            color: #ddd;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            border-radius: 10px 10px 0 0;
+            width: 90%;
+        }
+        .info-block {
+            flex: 1 1 200px;
+            min-width: 200px;
+        }
+        .info-block h3 {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .info-block p {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-top: 0;
+        }
+        .info-block a {
+            color: #aaa;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .info-block a:hover {
+            text-decoration: underline;
+            color: #4ecae6;
+        }
+        .upload-section {
+            background-color: black;
+            padding: 30px 40px 60px 40px;
+            color: white;
+            max-width: 1200px;
+            width: 90%;
+            border-radius: 0 0 10px 10px;
+        }
+        .upload-section table {
+            width: 100%;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .upload-section td {
+            padding: 10px;
+            font-size: 18px;
+            vertical-align: middle;
+        }
+        .upload-section input[type="file"],
+        .upload-section input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            border: none;
+        }
+        .N{
+            width: 150px;
+            padding: 10px;
+            font-size: 20px;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">HEART ATTACK PREDICTION</div>
+        <div class="nav-items">
+            <p>Logged</p>
+            <p>Result</p>
+            <p>Analysis</p>
+        </div>
+    </header>
+    <div class="main-title">Heart Attack Prediction using Retinal Image</div>
+    <div class="info-section">
+        <div class="info-block">
+            <h3>Heart Attack Prediction</h3>
+            <p>In this project, we propose an intelligent system to detect and distinguish Heart Attack from Eye images by deep learning techniques.</p>
+            <a href="#">More info ›</a></div>
+        <div class="info-block">
+            <h3>Recurrent Neural Network</h3>
+            <p>Deep Learning algorithms store information in the same manner as the human brain does, but on a much smaller scale.</p></div>
+        <div class="info-block">
+            <h3>6000+ Clinical Data</h3>
+            <p>Multiple data sets used for evaluation and RNN Ensembles are used to improve accuracy.</p></div>
+        <div class="info-block">
+            <h3>98% Accuracy</h3>
+            <p>In our system, we consider dropout rate, learning rate, kernel size and optimizer hyperparameter.</p></div>
+        <div class="info-block">
+            <h3>Web Application</h3>
+            <p>More interactive Flask Based Web Applications.</p></div></div>
+    <section class="upload-section">
+        <form  method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Upload Image</td>
+                    <td><input type="file" name="file" id="imageUpload" required/></td>
+                </tr>
+                <tr>
+                    <td>Number of Clusters</td>
+                    <td><input type="number" name="clusters" min="2" max="10" required/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;"><input class="N" type="submit" value="Next"></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <script>
+        function saveImageToLocalStorage(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please upload an image');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localStorage.setItem('uploadedImage', e.target.result);
+                event.target.submit();
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/023/570/085/small/red-heart-and-stethoscope-illustration-ai-generative-free-photo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            color: black;
+            font-size: 16px;
+        }
+        h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        .password-wrapper input {
+            padding-right: 40px;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 18px;
+            color: #555;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('login') }}">
+        <h2>Admin Login</h2>
+        
+        <!-- Show error message if login fails -->
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <table>
+            <tr>
+                <td>Admin</td>
+                <td>
+                    <input type="text" name="username" placeholder="Enter name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" id="passwordInput" placeholder="Enter Password" required>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Toggle password visibility">&#128065;</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    </script>
+</body>
+</html>
